@@ -14,7 +14,196 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      aga_detectors: {
+        Row: {
+          abb_tagname: string | null
+          accuracy: string | null
+          area: string | null
+          calibration_date: string | null
+          calibration_due_date: string | null
+          calibration_gas: string | null
+          created_at: string
+          description: string | null
+          field_status: string | null
+          id: string
+          iq_reprogrammed: string | null
+          location: string | null
+          media: string | null
+          nne_remarks: string | null
+          o_adjust: string | null
+          range_max: number | null
+          range_min: number | null
+          recipe: string | null
+          remarks: string | null
+          rgu: string | null
+          sensor_change: string | null
+          serial_no_detector: string | null
+          serial_no_sensor: string | null
+          span_adjust: string | null
+          span_gas_cert: string | null
+          system_status: string | null
+          tag: string | null
+          trip_point_h: string | null
+          trip_point_hh: string | null
+          unit: string | null
+          unit_serial: string | null
+          updated_at: string
+          zero_gas_cert: string | null
+        }
+        Insert: {
+          abb_tagname?: string | null
+          accuracy?: string | null
+          area?: string | null
+          calibration_date?: string | null
+          calibration_due_date?: string | null
+          calibration_gas?: string | null
+          created_at?: string
+          description?: string | null
+          field_status?: string | null
+          id?: string
+          iq_reprogrammed?: string | null
+          location?: string | null
+          media?: string | null
+          nne_remarks?: string | null
+          o_adjust?: string | null
+          range_max?: number | null
+          range_min?: number | null
+          recipe?: string | null
+          remarks?: string | null
+          rgu?: string | null
+          sensor_change?: string | null
+          serial_no_detector?: string | null
+          serial_no_sensor?: string | null
+          span_adjust?: string | null
+          span_gas_cert?: string | null
+          system_status?: string | null
+          tag?: string | null
+          trip_point_h?: string | null
+          trip_point_hh?: string | null
+          unit?: string | null
+          unit_serial?: string | null
+          updated_at?: string
+          zero_gas_cert?: string | null
+        }
+        Update: {
+          abb_tagname?: string | null
+          accuracy?: string | null
+          area?: string | null
+          calibration_date?: string | null
+          calibration_due_date?: string | null
+          calibration_gas?: string | null
+          created_at?: string
+          description?: string | null
+          field_status?: string | null
+          id?: string
+          iq_reprogrammed?: string | null
+          location?: string | null
+          media?: string | null
+          nne_remarks?: string | null
+          o_adjust?: string | null
+          range_max?: number | null
+          range_min?: number | null
+          recipe?: string | null
+          remarks?: string | null
+          rgu?: string | null
+          sensor_change?: string | null
+          serial_no_detector?: string | null
+          serial_no_sensor?: string | null
+          span_adjust?: string | null
+          span_gas_cert?: string | null
+          system_status?: string | null
+          tag?: string | null
+          trip_point_h?: string | null
+          trip_point_hh?: string | null
+          unit?: string | null
+          unit_serial?: string | null
+          updated_at?: string
+          zero_gas_cert?: string | null
+        }
+        Relationships: []
+      }
+      sensor_changes: {
+        Row: {
+          change_date: string
+          comment: string | null
+          created_at: string
+          detector_id: string
+          id: string
+          new_serial_no_sensor: string
+          old_serial_no_sensor: string | null
+        }
+        Insert: {
+          change_date?: string
+          comment?: string | null
+          created_at?: string
+          detector_id: string
+          id?: string
+          new_serial_no_sensor: string
+          old_serial_no_sensor?: string | null
+        }
+        Update: {
+          change_date?: string
+          comment?: string | null
+          created_at?: string
+          detector_id?: string
+          id?: string
+          new_serial_no_sensor?: string
+          old_serial_no_sensor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sensor_changes_detector_id_fkey"
+            columns: ["detector_id"]
+            isOneToOne: false
+            referencedRelation: "aga_detectors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_logs: {
+        Row: {
+          created_at: string
+          detector_id: string
+          id: string
+          new_calibration_date: string | null
+          problem_description: string | null
+          service_date: string
+          span_gas_cert: string | null
+          work_performed: string | null
+          zero_gas_cert: string | null
+        }
+        Insert: {
+          created_at?: string
+          detector_id: string
+          id?: string
+          new_calibration_date?: string | null
+          problem_description?: string | null
+          service_date?: string
+          span_gas_cert?: string | null
+          work_performed?: string | null
+          zero_gas_cert?: string | null
+        }
+        Update: {
+          created_at?: string
+          detector_id?: string
+          id?: string
+          new_calibration_date?: string | null
+          problem_description?: string | null
+          service_date?: string
+          span_gas_cert?: string | null
+          work_performed?: string | null
+          zero_gas_cert?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_logs_detector_id_fkey"
+            columns: ["detector_id"]
+            isOneToOne: false
+            referencedRelation: "aga_detectors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
