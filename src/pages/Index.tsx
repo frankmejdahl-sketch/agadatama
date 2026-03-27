@@ -4,7 +4,8 @@ import { AgaDetector } from "@/integrations/supabase/helpers";
 import { AGADetectorList } from "@/components/AGADetectorList";
 import { AGADataForm } from "@/components/AGADataForm";
 import { toast } from "sonner";
-import { Shield } from "lucide-react";
+import { Shield, Save } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type View = "list" | "form";
 
@@ -59,13 +60,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card px-6 py-4">
-        <div className="flex items-center gap-3">
-          <Shield className="h-6 w-6 text-primary" />
-          <div>
-            <h1 className="text-xl font-bold text-foreground">AGA Detektor Database MA</h1>
-            <p className="text-sm text-muted-foreground">Gasdetektorer - Kalibrering & Status</p>
+      <header className="sticky top-0 z-50 border-b bg-card px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Shield className="h-6 w-6 text-primary" />
+            <div>
+              <h1 className="text-xl font-bold text-foreground">AGA Detektor Database MA</h1>
+              <p className="text-sm text-muted-foreground">Gasdetektorer - Kalibrering & Status</p>
+            </div>
           </div>
+          {view === "form" && (
+            <Button onClick={() => { const formEl = document.querySelector('form'); formEl?.requestSubmit(); }} disabled={loading} className="gap-2">
+              <Save className="h-4 w-4" />
+              {loading ? "Gemmer..." : "Gem"}
+            </Button>
+          )}
         </div>
       </header>
 
