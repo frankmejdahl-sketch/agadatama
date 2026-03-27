@@ -48,8 +48,8 @@ export function AGADataForm({ detector, onSave, onCancel, loading }: AGADataForm
     }));
   };
 
-  const Field = ({ label, field, type = "text" }: { label: string; field: keyof FormData; type?: string }) => (
-    <div className="space-y-1">
+  const renderField = (label: string, field: keyof FormData, type = "text") => (
+    <div className="space-y-1" key={field}>
       <Label className="text-xs font-medium text-muted-foreground">{label}</Label>
       <Input
         type={type}
