@@ -48,8 +48,8 @@ export function AGADataForm({ detector, onSave, onCancel, loading }: AGADataForm
     }));
   };
 
-  const Field = ({ label, field, type = "text" }: { label: string; field: keyof FormData; type?: string }) => (
-    <div className="space-y-1">
+  const renderField = (label: string, field: keyof FormData, type = "text") => (
+    <div className="space-y-1" key={field}>
       <Label className="text-xs font-medium text-muted-foreground">{label}</Label>
       <Input
         type={type}
@@ -73,10 +73,10 @@ export function AGADataForm({ detector, onSave, onCancel, loading }: AGADataForm
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-primary border-b border-border pb-1">Identifikation</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <Field label="Tag" field="tag" />
-              <Field label="Beskrivelse" field="description" />
-              <Field label="Area" field="area" />
-              <Field label="Location" field="location" />
+              {renderField("Tag", "tag")}
+              {renderField("Beskrivelse", "description")}
+              {renderField("Area", "area")}
+              {renderField("Location", "location")}
             </div>
           </div>
 
@@ -84,11 +84,11 @@ export function AGADataForm({ detector, onSave, onCancel, loading }: AGADataForm
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-primary border-b border-border pb-1">Enhed & Sensor</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <Field label="Serial No. Detector" field="serial_no_detector" />
-              <Field label="Serial No. Sensor" field="serial_no_sensor" />
-              <Field label="Media" field="media" />
-              <Field label="Sensor Change" field="sensor_change" />
-              <Field label="Kalibrerings Gas" field="calibration_gas" />
+              {renderField("Serial No. Detector", "serial_no_detector")}
+              {renderField("Serial No. Sensor", "serial_no_sensor")}
+              {renderField("Media", "media")}
+              {renderField("Sensor Change", "sensor_change")}
+              {renderField("Kalibrerings Gas", "calibration_gas")}
             </div>
           </div>
 
@@ -120,8 +120,8 @@ export function AGADataForm({ detector, onSave, onCancel, loading }: AGADataForm
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-primary border-b border-border pb-1">Kalibrering</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <Field label="Calibration Date" field="calibration_date" type="date" />
-              <Field label="Calibration Due Date" field="calibration_due_date" type="date" />
+              {renderField("Calibration Date", "calibration_date", "date")}
+              {renderField("Calibration Due Date", "calibration_due_date", "date")}
             </div>
           </div>
 
@@ -129,12 +129,12 @@ export function AGADataForm({ detector, onSave, onCancel, loading }: AGADataForm
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-primary border-b border-border pb-1">Måleområde & Nøjagtighed</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-              <Field label="Range Min." field="range_min" type="number" />
-              <Field label="Range Max." field="range_max" type="number" />
-              <Field label="Unit" field="unit" />
-              <Field label="Accuracy" field="accuracy" />
-              <Field label="Trip Point, H" field="trip_point_h" />
-              <Field label="Trip Point, HH" field="trip_point_hh" />
+              {renderField("Range Min.", "range_min", "number")}
+              {renderField("Range Max.", "range_max", "number")}
+              {renderField("Unit", "unit")}
+              {renderField("Accuracy", "accuracy")}
+              {renderField("Trip Point, H", "trip_point_h")}
+              {renderField("Trip Point, HH", "trip_point_hh")}
             </div>
           </div>
 
@@ -142,11 +142,11 @@ export function AGADataForm({ detector, onSave, onCancel, loading }: AGADataForm
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-primary border-b border-border pb-1">Certifikater & Justering</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <Field label="0 Gas Cert" field="zero_gas_cert" />
-              <Field label="Span Gas Cert" field="span_gas_cert" />
-              <Field label="O - Adjust" field="o_adjust" />
-              <Field label="Span - Adjust" field="span_adjust" />
-              <Field label="IQ Reprogrammed" field="iq_reprogrammed" />
+              {renderField("0 Gas Cert", "zero_gas_cert")}
+              {renderField("Span Gas Cert", "span_gas_cert")}
+              {renderField("O - Adjust", "o_adjust")}
+              {renderField("Span - Adjust", "span_adjust")}
+              {renderField("IQ Reprogrammed", "iq_reprogrammed")}
             </div>
           </div>
 
@@ -154,8 +154,8 @@ export function AGADataForm({ detector, onSave, onCancel, loading }: AGADataForm
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-primary border-b border-border pb-1">Status & Bemærkninger</h3>
             <div className="grid grid-cols-2 gap-3">
-              <Field label="System Status" field="system_status" />
-              <Field label="Field Status" field="field_status" />
+              {renderField("System Status", "system_status")}
+              {renderField("Field Status", "field_status")}
             </div>
             <div className="space-y-1">
               <Label className="text-xs font-medium text-muted-foreground">Remarks</Label>
