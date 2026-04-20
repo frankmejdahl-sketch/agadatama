@@ -85,7 +85,7 @@ export function ServiceLogSection({ detectorId, onCalibrationUpdated }: ServiceL
     }
 
     if (hasCalibration && calibrationDate) {
-      const updateData: Record<string, string> = { calibration_date: calibrationDate };
+      const updateData: { calibration_date: string; zero_gas_cert?: string; span_gas_cert?: string } = { calibration_date: calibrationDate };
       if (zeroGasCert.trim()) updateData.zero_gas_cert = zeroGasCert.trim();
       if (spanGasCert.trim()) updateData.span_gas_cert = spanGasCert.trim();
 
