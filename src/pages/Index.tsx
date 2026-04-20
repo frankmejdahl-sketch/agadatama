@@ -4,12 +4,14 @@ import { AgaDetector } from "@/integrations/supabase/helpers";
 import { AGADetectorList } from "@/components/AGADetectorList";
 import { AGADataForm } from "@/components/AGADataForm";
 import { toast } from "sonner";
-import { Shield, Save } from "lucide-react";
+import { Shield, Save, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 type View = "list" | "form";
 
 const Index = () => {
+  const { user, signOut } = useAuth();
   const [detectors, setDetectors] = useState<AgaDetector[]>([]);
   const [selected, setSelected] = useState<AgaDetector | null>(null);
   const [view, setView] = useState<View>("list");
@@ -41,7 +43,7 @@ const Index = () => {
     } else {
       const { error } = await supabase
         .from("aga_detectors")
-        .insert(formData);
+        .insert({ ...formData, user_id: user?.id });
       if (error) { toast.error("Fejl ved oprettelse: " + error.message); }
       else { toast.success("Detektor oprettet"); }
     }
@@ -69,12 +71,19 @@ const Index = () => {
               <p className="text-sm text-muted-foreground">Gasdetektorer - Kalibrering & Status</p>
             </div>
           </div>
-          {view === "form" && (
-            <Button onClick={() => { const formEl = document.querySelector('form'); formEl?.requestSubmit(); }} disabled={loading} className="gap-2">
-              <Save className="h-4 w-4" />
-              {loading ? "Gemmer..." : "Gem"}
+          <div className="flex items-center gap-2">
+            {view === "form" && (
+              <Button onClick={() => { const formEl = document.querySelector('form'); formEl?.requestSubmit(); }} disabled={loading} className="gap-2">
+                <Save className="h-4 w-4" />
+                {loading ? "Gemmer..." : "Gem"}
+              </Button>
+            )}
+            <span className="text-xs text-muted-foreground hidden sm:inline">{user?.email}</span>
+            <Button variant="outline" size="sm" onClick={signOut} className="gap-2">
+              <LogOut className="h-4 w-4" />
+              Log ud
             </Button>
-          )}
+          </div>
         </div>
       </header>
 
