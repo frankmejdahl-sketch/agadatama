@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Wrench, History, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
 
 interface ServiceLog {
   id: string;
@@ -27,6 +28,7 @@ interface ServiceLogSectionProps {
 }
 
 export function ServiceLogSection({ detectorId, onCalibrationUpdated }: ServiceLogSectionProps) {
+  const { user } = useAuth();
   const [history, setHistory] = useState<ServiceLog[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
@@ -70,6 +72,7 @@ export function ServiceLogSection({ detectorId, onCalibrationUpdated }: ServiceL
 
     const { error: insertErr } = await supabase.from("service_logs").insert({
       detector_id: detectorId,
+      user_id: user?.id,
       problem_description: problemDescription.trim() || null,
       work_performed: workPerformed.trim() || null,
       service_date: serviceDate,
