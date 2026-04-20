@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Plus, History, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
 
 interface SensorChange {
   id: string;
@@ -25,6 +26,7 @@ interface SensorChangeSectionProps {
 }
 
 export function SensorChangeSection({ detectorId, currentSensorSerial, onSensorChanged }: SensorChangeSectionProps) {
+  const { user } = useAuth();
   const [history, setHistory] = useState<SensorChange[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
@@ -53,6 +55,7 @@ export function SensorChangeSection({ detectorId, currentSensorSerial, onSensorC
 
     const { error: insertErr } = await supabase.from("sensor_changes").insert({
       detector_id: detectorId,
+      user_id: user?.id,
       old_serial_no_sensor: currentSensorSerial || null,
       new_serial_no_sensor: newSerial.trim(),
       comment: comment.trim() || null,
