@@ -48,6 +48,7 @@ export type Database = {
           unit: string | null
           unit_serial: string | null
           updated_at: string
+          user_id: string | null
           zero_gas_cert: string | null
         }
         Insert: {
@@ -83,6 +84,7 @@ export type Database = {
           unit?: string | null
           unit_serial?: string | null
           updated_at?: string
+          user_id?: string | null
           zero_gas_cert?: string | null
         }
         Update: {
@@ -118,7 +120,35 @@ export type Database = {
           unit?: string | null
           unit_serial?: string | null
           updated_at?: string
+          user_id?: string | null
           zero_gas_cert?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -131,6 +161,7 @@ export type Database = {
           id: string
           new_serial_no_sensor: string
           old_serial_no_sensor: string | null
+          user_id: string | null
         }
         Insert: {
           change_date?: string
@@ -140,6 +171,7 @@ export type Database = {
           id?: string
           new_serial_no_sensor: string
           old_serial_no_sensor?: string | null
+          user_id?: string | null
         }
         Update: {
           change_date?: string
@@ -149,6 +181,7 @@ export type Database = {
           id?: string
           new_serial_no_sensor?: string
           old_serial_no_sensor?: string | null
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -169,6 +202,7 @@ export type Database = {
           problem_description: string | null
           service_date: string
           span_gas_cert: string | null
+          user_id: string | null
           work_performed: string | null
           zero_gas_cert: string | null
         }
@@ -180,6 +214,7 @@ export type Database = {
           problem_description?: string | null
           service_date?: string
           span_gas_cert?: string | null
+          user_id?: string | null
           work_performed?: string | null
           zero_gas_cert?: string | null
         }
@@ -191,6 +226,7 @@ export type Database = {
           problem_description?: string | null
           service_date?: string
           span_gas_cert?: string | null
+          user_id?: string | null
           work_performed?: string | null
           zero_gas_cert?: string | null
         }
